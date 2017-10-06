@@ -1,0 +1,1534 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="WarmUpModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Communication">
+          <Key>
+            <PropertyRef Name="CommunicationId" />
+          </Key>
+          <Property Name="CreatedUtcDateTime" Type="datetime" />
+          <Property Name="LastUpdatedUtcDateTime" Type="datetime" />
+          <Property Name="DevicePushId" Type="nvarchar(max)" />
+          <Property Name="TargetUserId" Type="nvarchar" MaxLength="100" />
+          <Property Name="PushInfoId" Type="bigint" />
+          <Property Name="IsRead" Type="bit" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="DepartmentId" Type="int" />
+          <Property Name="CommunicationId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DataKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateValue" Type="nvarchar(max)" />
+          <Property Name="LastUpdatedUtcDateTime" Type="datetime" />
+          <Property Name="CreatedUtcDateTime" Type="datetime" />
+          <Property Name="CommunicationId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="DevicePush">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientId" Type="nvarchar" MaxLength="128" />
+          <Property Name="PushId" Type="nvarchar(max)" />
+          <Property Name="Platform" Type="nvarchar" MaxLength="50" />
+          <Property Name="State" Type="bit" />
+          <Property Name="CreatedUTCDateTime" Type="datetime" />
+          <Property Name="CustomerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="450" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsFree" Type="bit" />
+          <Property Name="PaymentFee" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Duration" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventStartDate" Type="datetime" />
+          <Property Name="EventEndDate" Type="datetime" />
+          <Property Name="MaxParticipants" Type="int" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EventLables">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="Label" Type="nvarchar" MaxLength="150" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CreatedUTCDateTime" Type="datetime" />
+          <Property Name="UpdatedUTCDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EventLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="Lat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lng" Type="nvarchar" MaxLength="50" />
+          <Property Name="MarkerColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EventParticipant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="ParticipantId" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EventRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="SentBy" Type="int" />
+          <Property Name="SentTo" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="PayerId" Type="int" />
+          <Property Name="BeneficiaryId" Type="int" />
+          <Property Name="TransactionId" Type="nvarchar" MaxLength="50" />
+          <Property Name="Amount" Type="float" />
+          <Property Name="DeductionAmont" Type="float" />
+          <Property Name="TransferAmount" Type="float" />
+          <Property Name="TaxAmount" Type="float" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMethod" Type="nvarchar" MaxLength="50" />
+          <Property Name="EventEntryCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="BarCode" Type="nvarchar" MaxLength="250" />
+          <Property Name="PaymentDate" Type="datetime" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcdate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="ResourceImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="FileExtension" Type="nvarchar(max)" />
+          <Property Name="FileURL" Type="nvarchar(max)" />
+          <Property Name="FileDirPath" Type="nvarchar(max)" />
+          <Property Name="UploadedBy" Type="int" />
+          <Property Name="ImageType" Type="nvarchar" MaxLength="50" />
+          <Property Name="OwnerId" Type="int" />
+          <Property Name="IsProfilePic" Type="bit" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" />
+          <Property Name="Price" Type="nvarchar" MaxLength="50" />
+          <Property Name="BillingFrequency" Type="int" />
+          <Property Name="IsActive" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="SubscriptionOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriptionId" Type="int" />
+          <Property Name="OfferingKey" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="100" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="150" />
+          <Property Name="TypeId" Type="int" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="Rating" Type="nvarchar" MaxLength="50" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+          <Property Name="Dob" Type="datetime" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lat" Type="nvarchar" MaxLength="50" />
+          <Property Name="Lng" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" />
+          <Property Name="userid" Type="int" />
+          <Property Name="Rating" Type="int" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="250" />
+          <Property Name="FromUserId" Type="int" />
+        </EntityType>
+        <EntityType Name="UserSubscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubscriptionId" Type="int" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="PaymentAmount" Type="datetime" />
+          <Property Name="LastPaymentDate" Type="datetime" />
+          <Property Name="NextPaymentDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsTrial" Type="bit" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" />
+          <Property Name="Token" Type="nvarchar" MaxLength="150" />
+          <Property Name="ExpireAt" Type="datetime" />
+          <Property Name="Source" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="nchar" MaxLength="10" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeName" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedUtcDate" Type="datetime" />
+          <Property Name="UpdatedUtcDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_CommunicationData_Communication">
+          <End Role="Communication" Type="Self.Communication" Multiplicity="0..1" />
+          <End Role="CommunicationData" Type="Self.CommunicationData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Communication">
+              <PropertyRef Name="CommunicationId" />
+            </Principal>
+            <Dependent Role="CommunicationData">
+              <PropertyRef Name="CommunicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Event_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventLables_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventLables" Type="Self.EventLables" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventLables">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventLocation_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventLocation" Type="Self.EventLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventLocation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventParticipant_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventParticipant" Type="Self.EventParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventParticipant">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventParticipant_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="EventParticipant" Type="Self.EventParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventParticipant">
+              <PropertyRef Name="ParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventRequest_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventRequest" Type="Self.EventRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventRequest">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventRequest_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="EventRequest" Type="Self.EventRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventRequest">
+              <PropertyRef Name="SentBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventRequest_UserAccount1">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="EventRequest" Type="Self.EventRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventRequest">
+              <PropertyRef Name="SentTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_UserAccount1">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="BeneficiaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceImage_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="ResourceImage" Type="Self.ResourceImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceImage">
+              <PropertyRef Name="UploadedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceImage_UserAccount1">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="ResourceImage" Type="Self.ResourceImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceImage">
+              <PropertyRef Name="UploadedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriptionOffer_Subscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="0..1" />
+          <End Role="SubscriptionOffer" Type="Self.SubscriptionOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscriptionOffer">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAccount">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRating_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRating_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRating_UserAccount1">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="FromUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSubscription_Subscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="0..1" />
+          <End Role="UserSubscription" Type="Self.UserSubscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSubscription">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSubscription_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="UserSubscription" Type="Self.UserSubscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSubscription">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserToken_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="UserToken" Type="Self.UserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WarmUpModelStoreContainer">
+          <EntitySet Name="Communication" EntityType="Self.Communication" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationData" EntityType="Self.CommunicationData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DevicePush" EntityType="Self.DevicePush" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventLables" EntityType="Self.EventLables" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventLocation" EntityType="Self.EventLocation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventParticipant" EntityType="Self.EventParticipant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventRequest" EntityType="Self.EventRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payment" EntityType="Self.Payment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResourceImage" EntityType="Self.ResourceImage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subscription" EntityType="Self.Subscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SubscriptionOffer" EntityType="Self.SubscriptionOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRating" EntityType="Self.UserRating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserSubscription" EntityType="Self.UserSubscription" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserToken" EntityType="Self.UserToken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserType" EntityType="Self.UserType" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CommunicationData_Communication" Association="Self.FK_CommunicationData_Communication">
+            <End Role="Communication" EntitySet="Communication" />
+            <End Role="CommunicationData" EntitySet="CommunicationData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Event_UserAccount" Association="Self.FK_Event_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Event" EntitySet="Event" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventLables_Event" Association="Self.FK_EventLables_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventLables" EntitySet="EventLables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventLocation_Event" Association="Self.FK_EventLocation_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventLocation" EntitySet="EventLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventParticipant_Event" Association="Self.FK_EventParticipant_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventParticipant" EntitySet="EventParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventParticipant_UserAccount" Association="Self.FK_EventParticipant_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="EventParticipant" EntitySet="EventParticipant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventRequest_Event" Association="Self.FK_EventRequest_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="EventRequest" EntitySet="EventRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventRequest_UserAccount" Association="Self.FK_EventRequest_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="EventRequest" EntitySet="EventRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventRequest_UserAccount1" Association="Self.FK_EventRequest_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="EventRequest" EntitySet="EventRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Event" Association="Self.FK_Payment_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_UserAccount" Association="Self.FK_Payment_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_UserAccount1" Association="Self.FK_Payment_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="Payment" EntitySet="Payment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceImage_UserAccount" Association="Self.FK_ResourceImage_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="ResourceImage" EntitySet="ResourceImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceImage_UserAccount1" Association="Self.FK_ResourceImage_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="ResourceImage" EntitySet="ResourceImage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriptionOffer_Subscription" Association="Self.FK_SubscriptionOffer_Subscription">
+            <End Role="Subscription" EntitySet="Subscription" />
+            <End Role="SubscriptionOffer" EntitySet="SubscriptionOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_UserType" Association="Self.FK_UserAccount_UserType">
+            <End Role="UserType" EntitySet="UserType" />
+            <End Role="UserAccount" EntitySet="UserAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRating_Event" Association="Self.FK_UserRating_Event">
+            <End Role="Event" EntitySet="Event" />
+            <End Role="UserRating" EntitySet="UserRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRating_UserAccount" Association="Self.FK_UserRating_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="UserRating" EntitySet="UserRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRating_UserAccount1" Association="Self.FK_UserRating_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="UserRating" EntitySet="UserRating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSubscription_Subscription" Association="Self.FK_UserSubscription_Subscription">
+            <End Role="Subscription" EntitySet="Subscription" />
+            <End Role="UserSubscription" EntitySet="UserSubscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSubscription_UserAccount" Association="Self.FK_UserSubscription_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="UserSubscription" EntitySet="UserSubscription" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserToken_UserAccount" Association="Self.FK_UserToken_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccount" />
+            <End Role="UserToken" EntitySet="UserToken" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="WarmUpModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsFree" Type="Boolean" />
+          <Property Name="PaymentFee" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserAccount" Relationship="Self.FK_Event_UserAccount" FromRole="Event" ToRole="UserAccount" />
+          <NavigationProperty Name="EventLocations" Relationship="Self.FK_EventLocation_Event" FromRole="Event" ToRole="EventLocation" />
+          <NavigationProperty Name="EventParticipants" Relationship="Self.FK_EventParticipant_Event" FromRole="Event" ToRole="EventParticipant" />
+          <NavigationProperty Name="EventRequests" Relationship="Self.FK_EventRequest_Event" FromRole="Event" ToRole="EventRequest" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_Event" FromRole="Event" ToRole="Payment" />
+          <NavigationProperty Name="EventLables" Relationship="WarmUpModel.FK_EventLables_Event" FromRole="Event" ToRole="EventLable" />
+          <Property Name="Duration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="450" FixedLength="false" Unicode="true" />
+          <Property Name="MaxParticipants" Type="Int32" />
+          <Property Name="EventStartDate" Type="DateTime" Precision="3" />
+          <Property Name="EventEndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserRatings" Relationship="WarmUpModel.FK_UserRating_Event" FromRole="Event" ToRole="UserRating" />
+        </EntityType>
+        <EntityType Name="EventLocation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MarkerColor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_EventLocation_Event" FromRole="EventLocation" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="EventParticipant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="ParticipantId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_EventParticipant_Event" FromRole="EventParticipant" ToRole="Event" />
+          <NavigationProperty Name="UserAccount" Relationship="WarmUpModel.FK_EventParticipant_UserAccount" FromRole="EventParticipant" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="EventRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="SentBy" Type="Int32" />
+          <Property Name="SentTo" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_EventRequest_Event" FromRole="EventRequest" ToRole="Event" />
+          <NavigationProperty Name="UserAccount" Relationship="WarmUpModel.FK_EventRequest_UserAccount" FromRole="EventRequest" ToRole="UserAccount" />
+          <NavigationProperty Name="UserAccount1" Relationship="WarmUpModel.FK_EventRequest_UserAccount1" FromRole="EventRequest" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="PayerId" Type="Int32" />
+          <Property Name="BeneficiaryId" Type="Int32" />
+          <Property Name="TransactionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Amount" Type="Double" />
+          <Property Name="DeductionAmont" Type="Double" />
+          <Property Name="TransferAmount" Type="Double" />
+          <Property Name="Currency" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="EventEntryCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcdate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Event" Relationship="Self.FK_Payment_Event" FromRole="Payment" ToRole="Event" />
+          <NavigationProperty Name="UserAccount" Relationship="Self.FK_Payment_UserAccount" FromRole="Payment" ToRole="UserAccount" />
+          <NavigationProperty Name="UserAccount1" Relationship="Self.FK_Payment_UserAccount1" FromRole="Payment" ToRole="UserAccount" />
+          <Property Name="BarCode" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="TaxAmount" Type="Double" />
+        </EntityType>
+        <EntityType Name="ResourceImage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileExtension" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileDirPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UploadedBy" Type="Int32" />
+          <Property Name="ImageType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerId" Type="Int32" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserAccount" Relationship="Self.FK_ResourceImage_UserAccount" FromRole="ResourceImage" ToRole="UserAccount" />
+          <Property Name="IsProfilePic" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Subscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BillingFrequency" Type="Int32" />
+          <Property Name="IsActive" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="SubscriptionOffers" Relationship="Self.FK_SubscriptionOffer_Subscription" FromRole="Subscription" ToRole="SubscriptionOffer" />
+          <NavigationProperty Name="UserSubscriptions" Relationship="Self.FK_UserSubscription_Subscription" FromRole="Subscription" ToRole="UserSubscription" />
+        </EntityType>
+        <EntityType Name="SubscriptionOffer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriptionId" Type="Int32" />
+          <Property Name="OfferingKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <NavigationProperty Name="Subscription" Relationship="Self.FK_SubscriptionOffer_Subscription" FromRole="SubscriptionOffer" ToRole="Subscription" />
+        </EntityType>
+        <EntityType Name="UserAccount">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Events" Relationship="Self.FK_Event_UserAccount" FromRole="UserAccount" ToRole="Event" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payment_UserAccount" FromRole="UserAccount" ToRole="Payment" />
+          <NavigationProperty Name="Payments1" Relationship="Self.FK_Payment_UserAccount1" FromRole="UserAccount" ToRole="Payment" />
+          <NavigationProperty Name="ResourceImages" Relationship="Self.FK_ResourceImage_UserAccount" FromRole="UserAccount" ToRole="ResourceImage" />
+          <NavigationProperty Name="UserType" Relationship="Self.FK_UserAccount_UserType" FromRole="UserAccount" ToRole="UserType" />
+          <NavigationProperty Name="UserSubscriptions" Relationship="Self.FK_UserSubscription_UserAccount" FromRole="UserAccount" ToRole="UserSubscription" />
+          <NavigationProperty Name="UserTokens" Relationship="Self.FK_UserToken_UserAccount" FromRole="UserAccount" ToRole="UserToken" />
+          <NavigationProperty Name="EventParticipants" Relationship="WarmUpModel.FK_EventParticipant_UserAccount" FromRole="UserAccount" ToRole="EventParticipant" />
+          <NavigationProperty Name="EventRequests" Relationship="WarmUpModel.FK_EventRequest_UserAccount" FromRole="UserAccount" ToRole="EventRequest" />
+          <NavigationProperty Name="EventRequests1" Relationship="WarmUpModel.FK_EventRequest_UserAccount1" FromRole="UserAccount" ToRole="EventRequest" />
+          <Property Name="Rating" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Dob" Type="DateTime" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Lng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UserRatings" Relationship="WarmUpModel.FK_UserRating_UserAccount" FromRole="UserAccount" ToRole="UserRating" />
+          <NavigationProperty Name="UserRatings1" Relationship="WarmUpModel.FK_UserRating_UserAccount1" FromRole="UserAccount" ToRole="UserRating" />
+        </EntityType>
+        <EntityType Name="UserSubscription">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubscriptionId" Type="Int32" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="PaymentAmount" Type="DateTime" Precision="3" />
+          <Property Name="LastPaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="NextPaymentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsTrial" Type="Boolean" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Subscription" Relationship="Self.FK_UserSubscription_Subscription" FromRole="UserSubscription" ToRole="Subscription" />
+          <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserSubscription_UserAccount" FromRole="UserSubscription" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="UserToken">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" />
+          <Property Name="Token" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ExpireAt" Type="DateTime" Precision="3" />
+          <Property Name="Source" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserAccount" Relationship="Self.FK_UserToken_UserAccount" FromRole="UserToken" ToRole="UserAccount" />
+        </EntityType>
+        <EntityType Name="UserType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedUtcDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUtcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserAccounts" Relationship="Self.FK_UserAccount_UserType" FromRole="UserType" ToRole="UserAccount" />
+        </EntityType>
+        <Association Name="FK_Event_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="Event" Type="Self.Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventLocation_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventLocation" Type="Self.EventLocation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventLocation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventParticipant_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventParticipant" Type="Self.EventParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventParticipant">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventRequest_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="EventRequest" Type="Self.EventRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventRequest">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_Event">
+          <End Role="Event" Type="Self.Event" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="PayerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payment_UserAccount1">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="Payment" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Payment">
+              <PropertyRef Name="BeneficiaryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResourceImage_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="ResourceImage" Type="Self.ResourceImage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ResourceImage">
+              <PropertyRef Name="UploadedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubscriptionOffer_Subscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="0..1" />
+          <End Role="SubscriptionOffer" Type="Self.SubscriptionOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubscriptionOffer">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSubscription_Subscription">
+          <End Role="Subscription" Type="Self.Subscription" Multiplicity="0..1" />
+          <End Role="UserSubscription" Type="Self.UserSubscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Subscription">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSubscription">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserAccount_UserType">
+          <End Role="UserType" Type="Self.UserType" Multiplicity="0..1" />
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserAccount">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSubscription_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="UserSubscription" Type="Self.UserSubscription" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserSubscription">
+              <PropertyRef Name="SubscriptionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserToken_UserAccount">
+          <End Role="UserAccount" Type="Self.UserAccount" Multiplicity="0..1" />
+          <End Role="UserToken" Type="Self.UserToken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserToken">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="WarmUpEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Events" EntityType="Self.Event" />
+          <EntitySet Name="EventLocations" EntityType="Self.EventLocation" />
+          <EntitySet Name="EventParticipants" EntityType="Self.EventParticipant" />
+          <EntitySet Name="EventRequests" EntityType="Self.EventRequest" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="ResourceImages" EntityType="Self.ResourceImage" />
+          <EntitySet Name="Subscriptions" EntityType="Self.Subscription" />
+          <EntitySet Name="SubscriptionOffers" EntityType="Self.SubscriptionOffer" />
+          <EntitySet Name="UserAccounts" EntityType="Self.UserAccount" />
+          <EntitySet Name="UserSubscriptions" EntityType="Self.UserSubscription" />
+          <EntitySet Name="UserTokens" EntityType="Self.UserToken" />
+          <EntitySet Name="UserTypes" EntityType="Self.UserType" />
+          <AssociationSet Name="FK_Event_UserAccount" Association="Self.FK_Event_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventLocation_Event" Association="Self.FK_EventLocation_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="EventLocation" EntitySet="EventLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventParticipant_Event" Association="Self.FK_EventParticipant_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="EventParticipant" EntitySet="EventParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventRequest_Event" Association="Self.FK_EventRequest_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="EventRequest" EntitySet="EventRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_Event" Association="Self.FK_Payment_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_UserAccount" Association="Self.FK_Payment_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payment_UserAccount1" Association="Self.FK_Payment_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="Payment" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResourceImage_UserAccount" Association="Self.FK_ResourceImage_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="ResourceImage" EntitySet="ResourceImages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubscriptionOffer_Subscription" Association="Self.FK_SubscriptionOffer_Subscription">
+            <End Role="Subscription" EntitySet="Subscriptions" />
+            <End Role="SubscriptionOffer" EntitySet="SubscriptionOffers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSubscription_Subscription" Association="Self.FK_UserSubscription_Subscription">
+            <End Role="Subscription" EntitySet="Subscriptions" />
+            <End Role="UserSubscription" EntitySet="UserSubscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserAccount_UserType" Association="Self.FK_UserAccount_UserType">
+            <End Role="UserType" EntitySet="UserTypes" />
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSubscription_UserAccount" Association="Self.FK_UserSubscription_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="UserSubscription" EntitySet="UserSubscriptions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserToken_UserAccount" Association="Self.FK_UserToken_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="UserToken" EntitySet="UserTokens" />
+          </AssociationSet>
+          <EntitySet Name="EventLables" EntityType="WarmUpModel.EventLable" />
+          <AssociationSet Name="FK_EventLables_Event" Association="WarmUpModel.FK_EventLables_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="EventLable" EntitySet="EventLables" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventParticipant_UserAccount" Association="WarmUpModel.FK_EventParticipant_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="EventParticipant" EntitySet="EventParticipants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventRequest_UserAccount" Association="WarmUpModel.FK_EventRequest_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="EventRequest" EntitySet="EventRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventRequest_UserAccount1" Association="WarmUpModel.FK_EventRequest_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="EventRequest" EntitySet="EventRequests" />
+          </AssociationSet>
+          <EntitySet Name="UserRatings" EntityType="WarmUpModel.UserRating" />
+          <AssociationSet Name="FK_UserRating_Event" Association="WarmUpModel.FK_UserRating_Event">
+            <End Role="Event" EntitySet="Events" />
+            <End Role="UserRating" EntitySet="UserRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRating_UserAccount" Association="WarmUpModel.FK_UserRating_UserAccount">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="UserRating" EntitySet="UserRatings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRating_UserAccount1" Association="WarmUpModel.FK_UserRating_UserAccount1">
+            <End Role="UserAccount" EntitySet="UserAccounts" />
+            <End Role="UserRating" EntitySet="UserRatings" />
+          </AssociationSet>
+          <EntitySet Name="DevicePushes" EntityType="WarmUpModel.DevicePush" />
+          <EntitySet Name="CommunicationDatas" EntityType="WarmUpModel.CommunicationData" />
+          <EntitySet Name="Communications" EntityType="WarmUpModel.Communication" />
+          <AssociationSet Name="FK_CommunicationData_Communication" Association="WarmUpModel.FK_CommunicationData_Communication">
+            <End Role="Communication" EntitySet="Communications" />
+            <End Role="CommunicationData" EntitySet="CommunicationDatas" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="EventLable">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="Label" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CreatedUTCDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedUTCDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Event" Relationship="WarmUpModel.FK_EventLables_Event" FromRole="EventLable" ToRole="Event" />
+        </EntityType>
+        <Association Name="FK_EventLables_Event">
+          <End Type="WarmUpModel.Event" Role="Event" Multiplicity="0..1" />
+          <End Type="WarmUpModel.EventLable" Role="EventLable" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventLable">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventParticipant_UserAccount">
+          <End Type="WarmUpModel.UserAccount" Role="UserAccount" Multiplicity="0..1" />
+          <End Type="WarmUpModel.EventParticipant" Role="EventParticipant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventParticipant">
+              <PropertyRef Name="ParticipantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventRequest_UserAccount">
+          <End Type="WarmUpModel.UserAccount" Role="UserAccount" Multiplicity="0..1" />
+          <End Type="WarmUpModel.EventRequest" Role="EventRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventRequest">
+              <PropertyRef Name="SentBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventRequest_UserAccount1">
+          <End Type="WarmUpModel.UserAccount" Role="UserAccount" Multiplicity="0..1" />
+          <End Type="WarmUpModel.EventRequest" Role="EventRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="EventRequest">
+              <PropertyRef Name="SentTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserRating">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" />
+          <Property Name="userid" Type="Int32" />
+          <Property Name="Rating" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Event" Relationship="WarmUpModel.FK_UserRating_Event" FromRole="UserRating" ToRole="Event" />
+          <NavigationProperty Name="UserAccount" Relationship="WarmUpModel.FK_UserRating_UserAccount" FromRole="UserRating" ToRole="UserAccount" />
+          <Property Name="FromUserId" Type="Int32" />
+          <NavigationProperty Name="UserAccount1" Relationship="WarmUpModel.FK_UserRating_UserAccount1" FromRole="UserRating" ToRole="UserAccount" />
+        </EntityType>
+        <Association Name="FK_UserRating_Event">
+          <End Type="WarmUpModel.Event" Role="Event" Multiplicity="0..1" />
+          <End Type="WarmUpModel.UserRating" Role="UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Event">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRating_UserAccount">
+          <End Type="WarmUpModel.UserAccount" Role="UserAccount" Multiplicity="0..1" />
+          <End Type="WarmUpModel.UserRating" Role="UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRating_UserAccount1">
+          <End Type="WarmUpModel.UserAccount" Role="UserAccount" Multiplicity="0..1" />
+          <End Type="WarmUpModel.UserRating" Role="UserRating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserAccount">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="UserRating">
+              <PropertyRef Name="FromUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="DevicePush">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="PushId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Platform" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="Boolean" />
+          <Property Name="CreatedUTCDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CustomerId" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CommunicationData">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataKey" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastUpdatedUtcDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CreatedUtcDateTime" Type="DateTime" Precision="3" />
+          <Property Name="CommunicationId" Type="Int64" />
+          <NavigationProperty Name="Communication" Relationship="WarmUpModel.FK_CommunicationData_Communication" FromRole="CommunicationData" ToRole="Communication" />
+        </EntityType>
+        <EntityType Name="Communication">
+          <Key>
+            <PropertyRef Name="CommunicationId" />
+          </Key>
+          <Property Name="CreatedUtcDateTime" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedUtcDateTime" Type="DateTime" Precision="3" />
+          <Property Name="DevicePushId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TargetUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PushInfoId" Type="Int64" />
+          <Property Name="IsRead" Type="Boolean" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <Property Name="CommunicationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="CommunicationDatas" Relationship="WarmUpModel.FK_CommunicationData_Communication" FromRole="Communication" ToRole="CommunicationData" />
+        </EntityType>
+        <Association Name="FK_CommunicationData_Communication">
+          <End Type="WarmUpModel.Communication" Role="Communication" Multiplicity="0..1" />
+          <End Type="WarmUpModel.CommunicationData" Role="CommunicationData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Communication">
+              <PropertyRef Name="CommunicationId" />
+            </Principal>
+            <Dependent Role="CommunicationData">
+              <PropertyRef Name="CommunicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="WarmUpModelStoreContainer" CdmEntityContainer="WarmUpEntities">
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="WarmUpModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EventEndDate" ColumnName="EventEndDate" />
+                <ScalarProperty Name="EventStartDate" ColumnName="EventStartDate" />
+                <ScalarProperty Name="MaxParticipants" ColumnName="MaxParticipants" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Duration" ColumnName="Duration" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsFree" ColumnName="IsFree" />
+                <ScalarProperty Name="PaymentFee" ColumnName="PaymentFee" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventLocations">
+            <EntityTypeMapping TypeName="WarmUpModel.EventLocation">
+              <MappingFragment StoreEntitySet="EventLocation">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="MarkerColor" ColumnName="MarkerColor" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventParticipants">
+            <EntityTypeMapping TypeName="WarmUpModel.EventParticipant">
+              <MappingFragment StoreEntitySet="EventParticipant">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="ParticipantId" ColumnName="ParticipantId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventRequests">
+            <EntityTypeMapping TypeName="WarmUpModel.EventRequest">
+              <MappingFragment StoreEntitySet="EventRequest">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="SentBy" ColumnName="SentBy" />
+                <ScalarProperty Name="SentTo" ColumnName="SentTo" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="WarmUpModel.Payment">
+              <MappingFragment StoreEntitySet="Payment">
+                <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="PayerId" ColumnName="PayerId" />
+                <ScalarProperty Name="BeneficiaryId" ColumnName="BeneficiaryId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="DeductionAmont" ColumnName="DeductionAmont" />
+                <ScalarProperty Name="TransferAmount" ColumnName="TransferAmount" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="EventEntryCode" ColumnName="EventEntryCode" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcdate" ColumnName="UpdatedUtcdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResourceImages">
+            <EntityTypeMapping TypeName="WarmUpModel.ResourceImage">
+              <MappingFragment StoreEntitySet="ResourceImage">
+                <ScalarProperty Name="IsProfilePic" ColumnName="IsProfilePic" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+                <ScalarProperty Name="FileURL" ColumnName="FileURL" />
+                <ScalarProperty Name="FileDirPath" ColumnName="FileDirPath" />
+                <ScalarProperty Name="UploadedBy" ColumnName="UploadedBy" />
+                <ScalarProperty Name="ImageType" ColumnName="ImageType" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subscriptions">
+            <EntityTypeMapping TypeName="WarmUpModel.Subscription">
+              <MappingFragment StoreEntitySet="Subscription">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="BillingFrequency" ColumnName="BillingFrequency" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SubscriptionOffers">
+            <EntityTypeMapping TypeName="WarmUpModel.SubscriptionOffer">
+              <MappingFragment StoreEntitySet="SubscriptionOffer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+                <ScalarProperty Name="OfferingKey" ColumnName="OfferingKey" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAccounts">
+            <EntityTypeMapping TypeName="WarmUpModel.UserAccount">
+              <MappingFragment StoreEntitySet="UserAccount">
+                <ScalarProperty Name="Lng" ColumnName="Lng" />
+                <ScalarProperty Name="Lat" ColumnName="Lat" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Dob" ColumnName="Dob" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSubscriptions">
+            <EntityTypeMapping TypeName="WarmUpModel.UserSubscription">
+              <MappingFragment StoreEntitySet="UserSubscription">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="SubscriptionId" ColumnName="SubscriptionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="LastPaymentDate" ColumnName="LastPaymentDate" />
+                <ScalarProperty Name="NextPaymentDate" ColumnName="NextPaymentDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsTrial" ColumnName="IsTrial" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTokens">
+            <EntityTypeMapping TypeName="WarmUpModel.UserToken">
+              <MappingFragment StoreEntitySet="UserToken">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="ExpireAt" ColumnName="ExpireAt" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserTypes">
+            <EntityTypeMapping TypeName="WarmUpModel.UserType">
+              <MappingFragment StoreEntitySet="UserType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
+                <ScalarProperty Name="TypeCode" ColumnName="TypeCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedUtcDate" ColumnName="CreatedUtcDate" />
+                <ScalarProperty Name="UpdatedUtcDate" ColumnName="UpdatedUtcDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventLables">
+            <EntityTypeMapping TypeName="WarmUpModel.EventLable">
+              <MappingFragment StoreEntitySet="EventLables">
+                <ScalarProperty Name="UpdatedUTCDateTime" ColumnName="UpdatedUTCDateTime" />
+                <ScalarProperty Name="CreatedUTCDateTime" ColumnName="CreatedUTCDateTime" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRatings">
+            <EntityTypeMapping TypeName="WarmUpModel.UserRating">
+              <MappingFragment StoreEntitySet="UserRating">
+                <ScalarProperty Name="FromUserId" ColumnName="FromUserId" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DevicePushes">
+            <EntityTypeMapping TypeName="WarmUpModel.DevicePush">
+              <MappingFragment StoreEntitySet="DevicePush">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="CreatedUTCDateTime" ColumnName="CreatedUTCDateTime" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Platform" ColumnName="Platform" />
+                <ScalarProperty Name="PushId" ColumnName="PushId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationDatas">
+            <EntityTypeMapping TypeName="WarmUpModel.CommunicationData">
+              <MappingFragment StoreEntitySet="CommunicationData">
+                <ScalarProperty Name="CommunicationId" ColumnName="CommunicationId" />
+                <ScalarProperty Name="CreatedUtcDateTime" ColumnName="CreatedUtcDateTime" />
+                <ScalarProperty Name="LastUpdatedUtcDateTime" ColumnName="LastUpdatedUtcDateTime" />
+                <ScalarProperty Name="DateValue" ColumnName="DateValue" />
+                <ScalarProperty Name="DataKey" ColumnName="DataKey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Communications">
+            <EntityTypeMapping TypeName="WarmUpModel.Communication">
+              <MappingFragment StoreEntitySet="Communication">
+                <ScalarProperty Name="CommunicationId" ColumnName="CommunicationId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="IsRead" ColumnName="IsRead" />
+                <ScalarProperty Name="PushInfoId" ColumnName="PushInfoId" />
+                <ScalarProperty Name="TargetUserId" ColumnName="TargetUserId" />
+                <ScalarProperty Name="DevicePushId" ColumnName="DevicePushId" />
+                <ScalarProperty Name="LastUpdatedUtcDateTime" ColumnName="LastUpdatedUtcDateTime" />
+                <ScalarProperty Name="CreatedUtcDateTime" ColumnName="CreatedUtcDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

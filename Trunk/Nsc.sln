@@ -1,0 +1,85 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.DAL", "Nsc\Nsc.Wu.DAL.csproj", "{3013223B-2BF6-47FE-AD14-B98AA430602E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.BLL", "Nsc.Wu.BLL\Nsc.Wu.BLL.csproj", "{2A75E616-3D52-4947-9D3A-56E88D1770A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.Common", "Nsc.Wu.Common\Nsc.Wu.Common.csproj", "{01C3FF3B-5B8F-4F26-A5BE-8E3642EBF78C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.Dto", "Nsc.Wu.Dto\Nsc.Wu.Dto.csproj", "{00A1C31A-BBAE-4794-9E36-DB19AC97966E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.Api", "Nsc.Wu.Api\Nsc.Wu.Api.csproj", "{5B80FBC9-E24D-4F25-83B3-61D4F1F8A6D9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.Api.Tests", "Nsc.Wu.Api.Tests\Nsc.Wu.Api.Tests.csproj", "{F5ADC9CA-6BAB-4F9C-B815-1910235507B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nsc.Wu.AdminApp", "Nsc.Wu.AdminApp\Nsc.Wu.AdminApp.csproj", "{081246F5-D1D1-4202-8D41-8BE93DAA5EFA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3013223B-2BF6-47FE-AD14-B98AA430602E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3013223B-2BF6-47FE-AD14-B98AA430602E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3013223B-2BF6-47FE-AD14-B98AA430602E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3013223B-2BF6-47FE-AD14-B98AA430602E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A75E616-3D52-4947-9D3A-56E88D1770A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A75E616-3D52-4947-9D3A-56E88D1770A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A75E616-3D52-4947-9D3A-56E88D1770A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A75E616-3D52-4947-9D3A-56E88D1770A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01C3FF3B-5B8F-4F26-A5BE-8E3642EBF78C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01C3FF3B-5B8F-4F26-A5BE-8E3642EBF78C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01C3FF3B-5B8F-4F26-A5BE-8E3642EBF78C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01C3FF3B-5B8F-4F26-A5BE-8E3642EBF78C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00A1C31A-BBAE-4794-9E36-DB19AC97966E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00A1C31A-BBAE-4794-9E36-DB19AC97966E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00A1C31A-BBAE-4794-9E36-DB19AC97966E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00A1C31A-BBAE-4794-9E36-DB19AC97966E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B80FBC9-E24D-4F25-83B3-61D4F1F8A6D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B80FBC9-E24D-4F25-83B3-61D4F1F8A6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B80FBC9-E24D-4F25-83B3-61D4F1F8A6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B80FBC9-E24D-4F25-83B3-61D4F1F8A6D9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5ADC9CA-6BAB-4F9C-B815-1910235507B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5ADC9CA-6BAB-4F9C-B815-1910235507B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5ADC9CA-6BAB-4F9C-B815-1910235507B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5ADC9CA-6BAB-4F9C-B815-1910235507B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{081246F5-D1D1-4202-8D41-8BE93DAA5EFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{081246F5-D1D1-4202-8D41-8BE93DAA5EFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{081246F5-D1D1-4202-8D41-8BE93DAA5EFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{081246F5-D1D1-4202-8D41-8BE93DAA5EFA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 8
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://nscdevelopment.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Nsc.Wu.Api.Tests\\Nsc.Wu.Api.Tests.csproj
+		SccProjectName1 = Nsc.Wu.Api.Tests
+		SccLocalPath1 = Nsc.Wu.Api.Tests
+		SccProjectUniqueName2 = Nsc.Wu.Api\\Nsc.Wu.Api.csproj
+		SccProjectName2 = Nsc.Wu.Api
+		SccLocalPath2 = Nsc.Wu.Api
+		SccProjectUniqueName3 = Nsc.Wu.BLL\\Nsc.Wu.BLL.csproj
+		SccProjectName3 = Nsc.Wu.BLL
+		SccLocalPath3 = Nsc.Wu.BLL
+		SccProjectUniqueName4 = Nsc.Wu.Common\\Nsc.Wu.Common.csproj
+		SccProjectName4 = Nsc.Wu.Common
+		SccLocalPath4 = Nsc.Wu.Common
+		SccProjectUniqueName5 = Nsc.Wu.Dto\\Nsc.Wu.Dto.csproj
+		SccProjectName5 = Nsc.Wu.Dto
+		SccLocalPath5 = Nsc.Wu.Dto
+		SccProjectUniqueName6 = Nsc\\Nsc.Wu.DAL.csproj
+		SccProjectName6 = Nsc
+		SccLocalPath6 = Nsc
+		SccProjectUniqueName7 = Nsc.Wu.AdminApp\\Nsc.Wu.AdminApp.csproj
+		SccProjectName7 = Nsc.Wu.AdminApp
+		SccLocalPath7 = Nsc.Wu.AdminApp
+	EndGlobalSection
+EndGlobal

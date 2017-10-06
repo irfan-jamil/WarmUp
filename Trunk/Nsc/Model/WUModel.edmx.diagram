@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="af7a6667cd6847f784960d7a3aab90e6" Name="Diagram1">
+        <EntityTypeShape EntityType="WarmUpModel.Event" Width="1.5" PointX="5.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.EventLocation" Width="1.5" PointX="7.5" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.EventParticipant" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.EventRequest" Width="1.5" PointX="7.5" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.Payment" Width="1.5" PointX="10.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.ResourceImage" Width="1.5" PointX="5.25" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.Subscription" Width="1.5" PointX="6" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.SubscriptionOffer" Width="1.5" PointX="8.25" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.UserAccount" Width="1.5" PointX="3" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.UserSubscription" Width="1.5" PointX="8.25" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.UserToken" Width="1.5" PointX="5.25" PointY="24.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="WarmUpModel.UserType" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="WarmUpModel.FK_Event_UserAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_EventLocation_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_EventParticipant_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_EventRequest_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_Payment_Event" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_Payment_UserAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_Payment_UserAccount1" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_ResourceImage_UserAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_SubscriptionOffer_Subscription" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_UserSubscription_Subscription" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_UserAccount_UserType" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_UserSubscription_UserAccount" ManuallyRouted="false" />
+        <AssociationConnector Association="WarmUpModel.FK_UserToken_UserAccount" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="WarmUpModel.EventLable" Width="1.5" PointX="7.5" PointY="3.125" />
+        <AssociationConnector Association="WarmUpModel.FK_EventLables_Event" />
+        <AssociationConnector Association="WarmUpModel.FK_EventParticipant_UserAccount" />
+        <AssociationConnector Association="WarmUpModel.FK_EventRequest_UserAccount" />
+        <AssociationConnector Association="WarmUpModel.FK_EventRequest_UserAccount1" />
+        <EntityTypeShape EntityType="WarmUpModel.UserRating" Width="1.5" PointX="3.375" PointY="0.75" />
+        <AssociationConnector Association="WarmUpModel.FK_UserRating_Event" />
+        <AssociationConnector Association="WarmUpModel.FK_UserRating_UserAccount" />
+        <AssociationConnector Association="WarmUpModel.FK_UserRating_UserAccount1" />
+        <EntityTypeShape EntityType="WarmUpModel.DevicePush" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="WarmUpModel.CommunicationData" Width="1.5" PointX="2.75" PointY="4.75" />
+        <EntityTypeShape EntityType="WarmUpModel.Communication" Width="1.5" PointX="0.75" PointY="4.5" />
+        <AssociationConnector Association="WarmUpModel.FK_CommunicationData_Communication" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
